@@ -1,0 +1,36 @@
+#add for board init.rc for recovery mode
+import /init.recovery.common.rc
+
+on init
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
+    setprop crypto.ready 1
+
+on post-fs
+	insmod /vendor/lib/modules/omnivision_td4375_spi_ts.ko
+	insmod /vendor/lib/modules/ocp96011.ko
+    insmod /vendor/lib/modules/focaltech_ft8756_spi_ts.ko
+
+on property:recovery.fastboot_mode=1
+    start vendor.boot-hal-1-0
+    start health-hal-2-0
+
+service vendor.sprd.hardware.vibrator-service /vendor/bin/hw/vendor.sprd.hardware.vibrator-service
+    class hal
+    user system
+    group system
+
+service wait_for_keymaster /system/bin/wait_for_keymaster
+    user root
+    group root system
+    priority -20
+    ioprio rt 0
+    seclabel u:r:recovery:s0
+
+service vendor.keymint-beanpod /vendor/bin/hw/android.hardware.security.keymint@1.0-service.beanpod
+    class early_hal
+    user nobody
+    seclabel u:r:recovery:s0
+
+on property:crypto.ready=1
+    start vendor.keymint-beanpod
+

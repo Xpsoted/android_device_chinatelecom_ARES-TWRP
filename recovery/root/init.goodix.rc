@@ -1,0 +1,11 @@
+on post-fs
+    insmod /vendor/lib/modules/goodix_fp.ko
+
+on factorytest
+    insmod /vendor/lib/modules/goodix_fp.ko
+
+on boot
+#add for goodix fingerprint
+    wait /dev/goodix_fp
+    chmod 660 /dev/goodix_fp
+    chown system system /dev/goodix_fp
