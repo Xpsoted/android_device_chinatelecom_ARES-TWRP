@@ -1,9 +1,29 @@
-# Android device tree for Tianyi1Hao2022 TYH212U (ARES)
+# Tianyi1Hao2022 TYH212U (ARES)
 
 ```
-#
-# Copyright (C) 2024 The Android Open Source Project
-#
-# SPDX-License-Identifier: Apache-2.0
-#
+这是天翼一号2022的TWRP Device Tree，最近忙别的去了，果断时间再来搞，或者你帮我完善Pr下？O_0
 ```
+
+已经修复：
+
+- [x] 触控
+
+- [x] 显示
+
+- [x] USB
+
+- [x] 解密（半残）
+
+- [x] ADB
+
+尚未修复：
+
+- [ ] Fastbootd（可能还是跟解密相关的问题）
+
+- [ ] 刷进去后不能正常启动系统
+
+- [ ] 开机会显示没有权限挂载Vendor（其实是好的）
+
+其他功能默认都是好的，如果你的data无法成功解密，过几分钟会自己重启
+
+  
